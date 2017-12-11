@@ -1,0 +1,18 @@
+after_script:
+  - docker images
+
+before_script:
+  - cd "$VERSION"
+  - IMAGE="bitcoin-gold:${VERSION/\//-}"
+
+env:
+  - VERSION=0.15/alpine
+  - VERSION=0.15
+
+language: bash
+
+script:
+  - docker build -t "$IMAGE" .
+  - docker run "$IMAGE" --version | grep "Bitcoin Gold"
+
+services: docker
