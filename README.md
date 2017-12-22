@@ -6,7 +6,7 @@ A Bitcoin Gold docker image.
 
 ## Tags
 
-- `0.15.0.1-alpine`, `0.15-alpine`, `latest` ([0.15/alpine/Dockerfile](https://github.com/uphold/docker-bitcoin-gold/blob/master/0.15/alpine/Dockerfile))
+- `0.15.0.1-alpine`, `0.15-alpine`, `alpine`, `latest` ([0.15/alpine/Dockerfile](https://github.com/uphold/docker-bitcoin-gold/blob/master/0.15/alpine/Dockerfile))
 - `0.15.0.1`, `0.15`  ([0.15/Dockerfile](https://github.com/uphold/docker-bitcoin-gold/blob/master/0.15/Dockerfile))
 
 ## What is Bitcoin Gold?
