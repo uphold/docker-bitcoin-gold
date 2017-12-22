@@ -85,6 +85,7 @@ RUN adduser -S bitcoingold
 RUN apk --no-cache add \
   boost \
   boost-program_options \
+  curl \
   libevent \
   libressl \
   libzmq \
