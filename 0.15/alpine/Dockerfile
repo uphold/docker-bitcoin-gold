@@ -42,15 +42,28 @@ RUN apk --no-cache add linux-headers
 RUN apk --no-cache add protobuf-dev
 RUN apk --no-cache add zeromq-dev
 
-ENV BITCOIN_GOLD_VERSION=0.15.0.1
+RUN set -ex \
+  && for key in \
+    38EE12EB597B4FC0 \
+  ; do \
+  gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" || \
+  gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
+  gpg --keyserver keyserver.pgp.com --recv-keys "$key" || \
+  gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" ; \
+  done
+
+ENV BITCOIN_GOLD_VERSION=0.15.0.2
+ENV BITCOIN_GOLD_FOLDER_VERSION=0.15.0
 ENV BITCOIN_GOLD_PREFIX=/opt/bitcoin-gold-${BITCOIN_GOLD_VERSION}
 ENV BITCOIN_GOLD_SHASUM="58e5d9f57e539536c5ca5286ddd67b4879b237727ae988d9bec009f18e69cfe9  ${BITCOIN_GOLD_VERSION}.tar.gz"
 
-RUN wget https://github.com/BTCGPU/BTCGPU/archive/${BITCOIN_GOLD_VERSION}.tar.gz
-RUN echo "${BITCOIN_GOLD_SHASUM}" | sha256sum -c
+RUN wget https://github.com/BTCGPU/BTCGPU/releases/download/v${BITCOIN_GOLD_VERSION}/bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}.tar.gz
+RUN wget https://github.com/BTCGPU/BTCGPU/releases/download/v${BITCOIN_GOLD_VERSION}/SHA256SUMS.asc
+RUN gpg --verify SHA256SUMS.asc
+RUN grep " bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}.tar.gz\$" SHA256SUMS.asc | sha256sum -c -
 RUN tar -xzf *.tar.gz
 
-WORKDIR /BTCGPU-${BITCOIN_GOLD_VERSION}
+WORKDIR /bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}
 
 RUN sed -i '/AC_PREREQ/a\AR_FLAGS=cr' src/univalue/configure.ac
 RUN sed -i '/AX_PROG_CC_FOR_BUILD/a\AR_FLAGS=cr' src/secp256k1/configure.ac
@@ -92,7 +105,7 @@ RUN apk --no-cache add \
   su-exec
 
 ENV BITCOIN_GOLD_DATA=/home/bitcoingold/.bitcoingold
-ENV BITCOIN_GOLD_VERSION=0.15.0.1
+ENV BITCOIN_GOLD_VERSION=0.15.0.2
 ENV BITCOIN_GOLD_PREFIX=/opt/bitcoin-gold-${BITCOIN_GOLD_VERSION}
 ENV PATH=${BITCOIN_GOLD_PREFIX}/bin:$PATH
 

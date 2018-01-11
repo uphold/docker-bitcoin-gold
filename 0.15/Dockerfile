@@ -12,6 +12,7 @@ RUN useradd -r bitcoingold \
   && set -ex \
   && for key in \
     B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+    38EE12EB597B4FC0 \
   ; do \
     gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
     gpg --keyserver keyserver.pgp.com --recv-keys "$key" || \
@@ -27,17 +28,18 @@ RUN curl -o /usr/local/bin/gosu -fSL https://github.com/tianon/gosu/releases/dow
   && rm /usr/local/bin/gosu.asc \
   && chmod +x /usr/local/bin/gosu
 
-ENV BITCOIN_GOLD_VERSION=0.15.0.1
+ENV BITCOIN_GOLD_VERSION=0.15.0.2
 ENV BITCOIN_GOLD_FOLDER_VERSION=0.15.0
-ENV BITCOIN_GOLD_SHASUM="25d7bf0deb125ecf5b50925a1c58e98c4b0b0a524470379c952f6b9310e97cfe  bitcoingold-${BITCOIN_GOLD_FOLDER_VERSION}-x86_64-pc-linux-gnu.zip"
-ENV BITCOIN_GOLD_PREFIX=/opt/bitcoin-gold-${BITCOIN_GOLD_VERSION}
+ENV BITCOIN_GOLD_PREFIX=/opt/bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}
 ENV BITCOIN_GOLD_DATA=/home/bitcoingold/.bitcoingold
 ENV PATH=${BITCOIN_GOLD_PREFIX}/bin:$PATH
 
-RUN curl -SLO https://github.com/BTCGPU/BTCGPU/releases/download/${BITCOIN_GOLD_VERSION}/bitcoingold-${BITCOIN_GOLD_FOLDER_VERSION}-x86_64-pc-linux-gnu.zip \
-  && echo "${BITCOIN_GOLD_SHASUM}" | sha256sum -c \
-  && unzip -d ${BITCOIN_GOLD_PREFIX} *.zip \
-  && rm *.zip
+RUN curl -SLO https://github.com/BTCGPU/BTCGPU/releases/download/v${BITCOIN_GOLD_VERSION}/bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}-x86_64-linux-gnu.tar.gz \
+  && curl -SLO https://github.com/BTCGPU/BTCGPU/releases/download/v${BITCOIN_GOLD_VERSION}/SHA256SUMS.asc \
+  && gpg --verify SHA256SUMS.asc \
+  && grep " bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}-x86_64-linux-gnu.tar.gz\$" SHA256SUMS.asc | sha256sum -c - \
+  && tar -xzf *.tar.gz -C /opt \
+  && rm *.tar.gz
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
