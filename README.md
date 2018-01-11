@@ -6,8 +6,8 @@ A Bitcoin Gold docker image.
 
 ## Tags
 
-- `0.15.0.1-alpine`, `0.15-alpine`, `alpine`, `latest` ([0.15/alpine/Dockerfile](https://github.com/uphold/docker-bitcoin-gold/blob/master/0.15/alpine/Dockerfile))
-- `0.15.0.1`, `0.15`  ([0.15/Dockerfile](https://github.com/uphold/docker-bitcoin-gold/blob/master/0.15/Dockerfile))
+- `0.15.0.2-alpine`, `0.15-alpine`, `alpine`, `latest` ([0.15/alpine/Dockerfile](https://github.com/uphold/docker-bitcoin-gold/blob/master/0.15/alpine/Dockerfile))
+- `0.15.0.2`, `0.15`  ([0.15/Dockerfile](https://github.com/uphold/docker-bitcoin-gold/blob/master/0.15/Dockerfile))
 
 ## What is Bitcoin Gold?
 
@@ -172,7 +172,7 @@ This image is officially supported on Docker version 17.09.0-ce, with support fo
 
 [License information](https://github.com/BTCGPU/BTCGPU/blob/master/COPYING) for the software contained in this image.
 
-[License information](https://github.com/uphold/docker-bitcoin-gold/blob/master/LICENSE) for the [uphold/docker-bitcoin-gold][docker-hub-url] docker project.
+[License information](https://github.com/uphold/docker-bitcoin-gold/blob/master/LICENSE) for the [uphold/bitcoin-gold][docker-hub-url] docker project.
 
 [docker-hub-url]: https://hub.docker.com/r/uphold/bitcoin-gold
 [docker-layers-image]: https://img.shields.io/imagelayers/layers/uphold/bitcoin-gold/latest.svg?style=flat-square
