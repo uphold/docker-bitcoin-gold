@@ -28,12 +28,11 @@ RUN curl -o /usr/local/bin/gosu -fSL https://github.com/tianon/gosu/releases/dow
   && rm /usr/local/bin/gosu.asc \
   && chmod +x /usr/local/bin/gosu
 
-ENV BITCOIN_GOLD_VERSION=0.15.0.2
-ENV BITCOIN_GOLD_FOLDER_VERSION=0.15.0
+ENV BITCOIN_GOLD_VERSION=0.15.1-rc1
+ENV BITCOIN_GOLD_FOLDER_VERSION=0.15.1
 ENV BITCOIN_GOLD_PREFIX=/opt/bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}
 ENV BITCOIN_GOLD_DATA=/home/bitcoingold/.bitcoingold
 ENV PATH=${BITCOIN_GOLD_PREFIX}/bin:$PATH
-
 RUN curl -SLO https://github.com/BTCGPU/BTCGPU/releases/download/v${BITCOIN_GOLD_VERSION}/bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}-x86_64-linux-gnu.tar.gz \
   && curl -SLO https://github.com/BTCGPU/BTCGPU/releases/download/v${BITCOIN_GOLD_VERSION}/SHA256SUMS.asc \
   && gpg --verify SHA256SUMS.asc \
