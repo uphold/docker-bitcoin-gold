@@ -52,7 +52,7 @@ RUN set -ex \
   gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" ; \
   done
 
-ENV BITCOIN_GOLD_VERSION=0.15.1-rc1
+ENV BITCOIN_GOLD_VERSION=0.15.1
 ENV BITCOIN_GOLD_FOLDER_VERSION=0.15.1
 ENV BITCOIN_GOLD_PREFIX=/opt/bitcoin-gold-${BITCOIN_GOLD_VERSION}
 ENV BITCOIN_GOLD_SHASUM="6cbeba8220ee8396c1a801a4baf36cfd6ff9764b85e355620d8bbe45c6aab4c9  ${BITCOIN_GOLD_FOLDER_VERSION}.tar.gz"
@@ -105,7 +105,7 @@ RUN apk --no-cache add \
   su-exec
 
 ENV BITCOIN_GOLD_DATA=/home/bitcoingold/.bitcoingold
-ENV BITCOIN_GOLD_VERSION=0.15.1-rc1
+ENV BITCOIN_GOLD_VERSION=0.15.1
 ENV BITCOIN_GOLD_PREFIX=/opt/bitcoin-gold-${BITCOIN_GOLD_VERSION}
 ENV PATH=${BITCOIN_GOLD_PREFIX}/bin:$PATH
 
