@@ -33,10 +33,10 @@ ENV BITCOIN_GOLD_FOLDER_VERSION=0.17.3
 ENV BITCOIN_GOLD_PREFIX=/opt/bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}
 ENV BITCOIN_GOLD_DATA=/home/bitcoingold/.bitcoingold
 ENV PATH=${BITCOIN_GOLD_PREFIX}/bin:$PATH
-RUN curl -SLO https://github.com/BTCGPU/BTCGPU/releases/download/v${BITCOIN_GOLD_VERSION}/bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}-x86_64-linux-gnu.tar.gz \
+RUN curl -SLO https://github.com/BTCGPU/BTCGPU/releases/download/v${BITCOIN_GOLD_VERSION}/bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}-aarch64-linux-gnu.tar.gz \
   && curl -SLO https://github.com/BTCGPU/BTCGPU/releases/download/v${BITCOIN_GOLD_VERSION}/SHA256SUMS.asc \
   && gpg --verify SHA256SUMS.asc \
-  && grep " bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}-x86_64-linux-gnu.tar.gz\$" SHA256SUMS.asc | sha256sum -c - \
+  && grep " bitcoin-gold-${BITCOIN_GOLD_FOLDER_VERSION}-aarch64-linux-gnu.tar.gz\$" SHA256SUMS.asc | sha256sum -c - \
   && tar -xzf *.tar.gz -C /opt \
   && rm *.tar.gz
 

@@ -1,0 +1,11 @@
+services:
+  bgoldd:
+    build: "0.17"
+    command:
+      -regtest
+      -rpcallowip=0.0.0.0/0
+      -rpcbind=0.0.0.0
+      -rpcpassword=foobar
+      -rpcuser=bitcoingoldrpc
+    ports:
+    - 18443:18443
