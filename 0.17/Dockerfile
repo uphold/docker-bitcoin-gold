@@ -16,8 +16,8 @@ RUN useradd -r bitcoingold \
   ; do \
     gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
     gpg --keyserver keyserver.pgp.com --recv-keys "$key" || \
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" || \
-    gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" ; \
+    gpg --keyserver keyserver.ubuntu.com --recv-keys "$key" || \
+    gpg --keyserver keys.openpgp.org --recv-keys "$key" ; \
   done
 
 ENV GOSU_VERSION=1.10
