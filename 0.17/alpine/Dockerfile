@@ -26,7 +26,6 @@ FROM alpine:3.9 as bitcoin-gold
 
 COPY --from=berkeleydb /opt /opt
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk --no-cache add autoconf
 RUN apk --no-cache add automake
 RUN apk --no-cache add boost-dev
@@ -42,7 +41,10 @@ RUN apk --no-cache add libtool
 RUN apk --no-cache add linux-headers
 RUN apk --no-cache add protobuf-dev
 RUN apk --no-cache add zeromq-dev
+
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.14/community" >> /etc/apk/repositories
 RUN apk --no-cache add libb2-dev
+
 RUN set -ex \
   && for key in \
     38EE12EB597B4FC0 \
@@ -96,7 +98,6 @@ LABEL maintainer.0="João Fonseca (@joaopaulofonseca)" \
 
 RUN adduser -S bitcoingold
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk --no-cache add \
   boost \
   boost-program_options \
@@ -104,7 +105,6 @@ RUN apk --no-cache add \
   libevent \
   libressl \
   libzmq \
-  libb2-dev \
   su-exec
 
 ENV BITCOIN_GOLD_DATA=/home/bitcoingold/.bitcoingold
